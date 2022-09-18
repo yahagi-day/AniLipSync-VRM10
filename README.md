@@ -1,4 +1,5 @@
-# AniLipSync-VRM
+# AniLipSync-VRM10
+forked from [AniLipSync-VRM](https://github.com/sh-akira/AniLipSync-VRM)
 VRMモデルでリミテッドアニメ風のリップシンクを実現するためのライブラリです。
 [AniLipSync](https://github.com/XVI/AniLipSync)がベースになっています。
 
@@ -24,7 +25,7 @@ Blend Shape ProxyにAliciaSolidを設定してください。
 
 # 使い方
 1. [OVRLipSync 1.28.0](https://developer.oculus.com/downloads/package/oculus-lipsync-unity/1.28.0/)をインポート
-2. [UniVRM 0.45](https://github.com/dwango/UniVRM/releases)をインポート
+2. [UniVRM 0.103.2](https://github.com/vrm-c/UniVRM/releases)をインポート
 3. [AniLipSync-VRM.unitypackage](https://github.com/sh-akira/AniLipSync-VRM/releases) をインポート
 4. 好きなVRMモデルをインポート
 5. `Assets/Oculus/LipSync/Prefabs/LipSyncInterface` プレハブをシーンに配置
