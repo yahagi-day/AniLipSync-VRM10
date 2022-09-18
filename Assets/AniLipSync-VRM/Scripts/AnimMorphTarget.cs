@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using VRM;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UniVRM10;
 
 namespace AniLipSync.VRM
 {
@@ -20,17 +20,17 @@ namespace AniLipSync.VRM
         public float frameRate = 12.0f;
 
         [Tooltip("BlendShapeの値を変化させるSkinnedMeshRenderer")]
-        public VRMBlendShapeProxy blendShapeProxy;
+        public Vrm10Instance Vrm10Instance;
 
         [Tooltip("aa, E, ih, oh, ouの順で割り当てるBlendShapeのindex")]
-        private Dictionary<BlendShapeKey, float> defaultValueDictionary = new Dictionary<BlendShapeKey, float> {
-            {BlendShapeKey.CreateFromPreset(BlendShapePreset.A), 0.0f },
-            {BlendShapeKey.CreateFromPreset(BlendShapePreset.E), 0.0f },
-            {BlendShapeKey.CreateFromPreset(BlendShapePreset.I), 0.0f },
-            {BlendShapeKey.CreateFromPreset(BlendShapePreset.O), 0.0f },
-            {BlendShapeKey.CreateFromPreset(BlendShapePreset.U), 0.0f },
+        private Dictionary<ExpressionKey, float> defaultValueDictionary = new Dictionary<ExpressionKey, float> {
+            {ExpressionKey.Aa, 0.0f },
+            {ExpressionKey.Ee, 0.0f },
+            {ExpressionKey.Ih, 0.0f },
+            {ExpressionKey.Oh, 0.0f },
+            {ExpressionKey.Ou, 0.0f },
         };
-        private List<BlendShapeKey> keyList;
+        private List<ExpressionKey> keyList;
 
         [Tooltip("OVRLipSyncに渡すSmoothing amountの値")]
         public int smoothAmount = 100;
@@ -44,11 +44,11 @@ namespace AniLipSync.VRM
 
         void Start()
         {
-            keyList = new List<BlendShapeKey>(defaultValueDictionary.Keys);
+            keyList = new List<ExpressionKey>(defaultValueDictionary.Keys);
 
-            if (blendShapeProxy == null)
+            if (Vrm10Instance == null)
             {
-                Debug.LogError("VRMBlendShapeProxyが指定されていません。", this);
+                Debug.LogError("Vrm10instanceが指定されていません。", this);
             }
 
             context = GetComponent<OVRLipSyncContextBase>();
@@ -62,7 +62,7 @@ namespace AniLipSync.VRM
 
         void Update()
         {
-            if (context == null || blendShapeProxy == null)
+            if (context == null || Vrm10Instance == null)
             {
                 return;
             }
@@ -119,7 +119,7 @@ namespace AniLipSync.VRM
             {
                 defaultValueDictionary[keyList[visemeIndex]] = transitionCurves[visemeIndex].Evaluate(transitionTimer) * curveAmplifier;
             }
-            blendShapeProxy.SetValues(defaultValueDictionary.ToList());
+            Vrm10Instance.Runtime.Expression.SetWeights(defaultValueDictionary.ToList());
         }
     }
 }
