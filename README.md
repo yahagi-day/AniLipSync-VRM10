@@ -1,5 +1,6 @@
 # AniLipSync-VRM10
 forked from [AniLipSync-VRM](https://github.com/sh-akira/AniLipSync-VRM)
+
 VRMモデルでリミテッドアニメ風のリップシンクを実現するためのライブラリです。
 [AniLipSync](https://github.com/XVI/AniLipSync)がベースになっています。
 
